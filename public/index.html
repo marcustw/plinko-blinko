@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plinko Blinko</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="ambient ambient-left"></div>
+      <div class="ambient ambient-right"></div>
+
+      <header class="hero panel">
+        <div>
+          <p class="eyebrow">Full Stack Arcade Demo</p>
+          <h1>Plinko Blinko</h1>
+          <p class="hero-copy">
+            Drop a ball, chase the center lane, and let the backend settle every wager.
+          </p>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-chip">
+            <span class="stat-label">Balance</span>
+            <strong id="balance-value">$0.00</strong>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-label">Games</span>
+            <strong id="games-value">0</strong>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-label">Best Win</span>
+            <strong id="best-win-value">$0.00</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-grid">
+        <section class="board-panel panel">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Live Board</p>
+              <h2>Server-Driven Drops</h2>
+            </div>
+            <div class="pill-row" id="risk-preview"></div>
+          </div>
+
+          <div class="board-frame">
+            <canvas id="plinko-board" aria-label="Animated plinko board"></canvas>
+          </div>
+
+          <div class="status-bar">
+            <p id="status-copy">Create a player to start dropping.</p>
+            <p id="round-copy">Waiting for the next round.</p>
+          </div>
+        </section>
+
+        <aside class="sidebar">
+          <section class="panel">
+            <div class="section-heading compact">
+              <div>
+                <p class="section-label">Player</p>
+                <h2>Profile</h2>
+              </div>
+            </div>
+
+            <form id="profile-form" class="stack-form">
+              <label>
+                <span>Name</span>
+                <input id="player-name" name="name" maxlength="20" placeholder="Lucky Marcus" required />
+              </label>
+              <button type="submit" class="primary-button" id="profile-button">Enter Arcade</button>
+            </form>
+
+            <div id="player-summary" class="player-summary hidden"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading compact">
+              <div>
+                <p class="section-label">Controls</p>
+                <h2>Place Your Bet</h2>
+              </div>
+            </div>
+
+            <form id="controls-form" class="stack-form">
+              <label>
+                <span>Risk</span>
+                <select id="risk-select" name="risk">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Bet Amount</span>
+                <div class="bet-inputs">
+                  <input id="bet-range" type="range" min="1" max="25" step="1" value="5" />
+                  <input id="bet-amount" type="number" min="1" max="25" step="1" value="5" />
+                </div>
+              </label>
+
+              <div class="hint-row">
+                <span id="bet-hint">$1 minimum</span>
+                <span id="balance-hint">Balance needed: $5.00</span>
+              </div>
+
+              <button type="submit" class="primary-button" id="drop-button">Drop Ball</button>
+            </form>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading compact">
+              <div>
+                <p class="section-label">Round Log</p>
+                <h2>Recent Drops</h2>
+              </div>
+            </div>
+
+            <div id="history-list" class="list-stack">
+              <p class="empty-copy">No drops yet.</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading compact">
+              <div>
+                <p class="section-label">Top Players</p>
+                <h2>Leaderboard</h2>
+              </div>
+            </div>
+
+            <div id="leaderboard-list" class="list-stack">
+              <p class="empty-copy">No players on the board yet.</p>
+            </div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
